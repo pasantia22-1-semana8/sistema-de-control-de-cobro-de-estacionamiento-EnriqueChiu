@@ -1,0 +1,49 @@
+.container__home{
+  position: absolute;
+  background: linear-gradient(90deg, #003D4D 0%, #00C996 100%);
+  width:100%;
+	height:100%; 
+}
+
+.home__title{
+  margin-top: 5%;
+  font-family: 'IM FELL Double Pica';
+  color: white;
+  font-size: 3vw;
+}
+
+.input__custom{
+  width: 100%;
+  font-size: 2vw;
+  font-family: 'IM FELL Double Pica';
+}
+
+.home__btn{
+  font-family: 'IM FELL Double Pica';
+  font-size: 2vw;
+  margin-left: 30%;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  background: #FF9900;
+  border: 1px solid #000000;
+  border-radius: 10px;
+}
+
+.home__info{
+  font-family: 'IM FELL Double Pica';
+  margin-top: 3%;
+  height: 55%;
+  background: #C4C4C4;
+  border-radius: 35px;
+}
+
+.home-info--title{
+  padding: 1%;
+}
+
+.home_register{
+  width: 50%;
+  font-size: 5vw;
+  background: #EBFF6D;
+  border-radius: 20px;
+}

@@ -1,0 +1,16 @@
+.nav__back{
+  background: linear-gradient(90deg, #000C40 0%, #607D8B 100%);
+  font-family: 'IM FELL Double Pica';
+}
+
+
+.nav__title{
+  color: #00FF66;
+  font-size: 25px;
+}
+
+.nav__logout{
+  color: #00FEC1;
+  font-size: 30px;
+  text-decoration: none;
+}

@@ -1,0 +1,21 @@
+.form__input{
+  position: relative;
+  width: 80%;
+  left: 10%;
+  margin-top: 1%;
+  margin-bottom: 2%;
+}
+
+.container__button{
+  display: flex;
+  flex-direction: row-reverse;
+  margin-right: 5%;
+}
+
+.form__button{
+  background: #FFB800;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  border-radius: 10px;
+  margin-bottom: 3%;
+}
