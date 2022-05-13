@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     'user',
     'app_cobro',
+    'app_vehiculo',
 ]
 
 MIDDLEWARE = [

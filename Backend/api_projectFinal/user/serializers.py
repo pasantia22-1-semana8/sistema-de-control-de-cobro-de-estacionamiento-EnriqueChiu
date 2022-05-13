@@ -1,18 +1,9 @@
+from this import d
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
 from user import models
 
-
-class UserModelSerializer(serializers.ModelSerializer):
-
-  class Meta:
-    model = models.Profile
-    fields = (
-      'username',
-      'rol',
-      'is_staff'
-    )
 
 
 class RolSerializer(serializers.ModelSerializer):
@@ -20,6 +11,23 @@ class RolSerializer(serializers.ModelSerializer):
   class Meta:
     model = models.Rol
     fields= '__all__'
+
+class UserModelSerializer(serializers.ModelSerializer):
+
+  class Meta:
+    model = models.Profile
+    fields = (
+      'id',
+      'username',
+      'rol',
+      'email',
+      'is_staff'
+    )
+  
+  def to_representation(self, instance):
+    response =  super().to_representation(instance)
+    response['rol'] = RolSerializer(instance.rol).data['nombre']
+    return response
 
 
 class LoginSerializer(serializers.Serializer):

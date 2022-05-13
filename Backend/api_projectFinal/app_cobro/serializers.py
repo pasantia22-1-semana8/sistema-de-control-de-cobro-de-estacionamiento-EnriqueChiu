@@ -1,20 +1,7 @@
 from rest_framework import serializers
 from app_cobro import models
-
-
-class Tipo_vehiculoSerializer(serializers.ModelSerializer):
-
-  class Meta:
-    model = models.Tipo_vehiculo
-    fields = '__all__'
-
-
-
-class Tipo_residenteSerializer(serializers.ModelSerializer):
-
-  class Meta:
-    model = models.Tipo_residente
-    fields = '__all__'
+from app_vehiculo.serializers import Tipo_residenteSerializer
+from app_vehiculo.serializers import Tipo_vehiculoSerializer
 
 
 class TarifaSerializer(serializers.ModelSerializer):
@@ -23,13 +10,11 @@ class TarifaSerializer(serializers.ModelSerializer):
     model = models.Tarifa
     fields = '__all__'
 
-
-class VehiculoSerializer(serializers.ModelSerializer):
-
-  class Meta:
-    model = models.Vehiculo
-    fields = '__all__'
-
+  def to_representation(self, instance):
+    response =  super().to_representation(instance)
+    response['tipo_vehiculo'] = Tipo_vehiculoSerializer(instance.tipo_vehiculo).data['nombre']
+    response['tipo_residente'] = Tipo_residenteSerializer(instance.tipo_residente).data['nombre']
+    return response
 
 class TickerSerializer(serializers.ModelSerializer):
 
@@ -37,6 +22,10 @@ class TickerSerializer(serializers.ModelSerializer):
     model = models.Ticker
     fields = '__all__'
 
+  def to_representation(self, instance):
+    response =  super().to_representation(instance)
+    response['tarifa'] = TarifaSerializer(instance.tarifa).data['tarifa']
+    return response
 
 class CajaSerializer(serializers.ModelSerializer):
 

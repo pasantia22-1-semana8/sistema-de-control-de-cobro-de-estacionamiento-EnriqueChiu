@@ -56,6 +56,7 @@ export default class Login extends Component {
     if (this.state.auth){
       let user = localStorage.getItem('user')
       let userJson = JSON.parse(user)
+      console.log(userJson)
       if (userJson.rol == 'admin'){
         return <Navigate to="/config" />
       }else if (userJson.rol == 'empleado') {

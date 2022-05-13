@@ -1,7 +1,7 @@
 from rest_framework.views import Response, APIView
 from rest_framework import viewsets
 from rest_framework import status
-
+from django.contrib.auth.models import User
 from user import serializers, models
 
 class RolView(viewsets.ModelViewSet):
@@ -25,10 +25,28 @@ class RolView(viewsets.ModelViewSet):
       }
       return Response(res, status=status.HTTP_400_BAD_REQUEST)
 
+  def destroy(self, request, *args, **kwargs):
+    rol = self.get_object()
+    rol.delete()
+    return Response({"message": "Se elimino correctamente"})
+
+class UserView(viewsets.ModelViewSet):
+
+  serializer_class = serializers.UserModelSerializer
+  queryset = models.Profile.objects.all()
+
+
+  def destroy(self, request, *args, **kwargs):
+    user = self.get_object()
+    user.delete()
+    return Response({"message": "Se elimino correctamente"})
+
+
 class LoginView(APIView):
 
   def post(self, request):
     serializer = serializers.LoginSerializer(data=request.data)
+    
     if serializer.is_valid():
       user, token = serializer.save()
       data = {
@@ -37,7 +55,10 @@ class LoginView(APIView):
         'token': token
       }
       datauser = data['user']
-      datauser['rol'] = '{}'.format(models.Rol.objects.filter(id=datauser['rol']).get())
+      try:
+        datauser['rol'] = '{}'.format(models.Rol.objects.filter(nombre=datauser['rol']).get())
+      except:
+        datauser['rol'] = 'admin'
       return Response(data, status=status.HTTP_200_OK)
     else:
       res = {

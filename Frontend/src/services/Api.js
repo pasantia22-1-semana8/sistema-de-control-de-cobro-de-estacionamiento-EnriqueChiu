@@ -56,6 +56,23 @@ const api = {
         method: 'POST',
         body: JSON.stringify(data)
       })
+    },
+    vehiculo(data){
+      return callApi('/create/vehiculo/',{
+        method: 'POST',
+        body: JSON.stringify(data)
+      })
+    },
+    ticker(data){
+      return callApi('/create/ticker/',{
+        method: 'POST',
+        body: JSON.stringify(data)
+      })
+    },
+    caja(){
+      return callApi('/create/caja/',{
+        method: 'POST'
+      })
     }
   },
   getData:{
@@ -74,17 +91,59 @@ const api = {
         method: 'GET'
       })
     },
-    ticker(id){
-      return callApi(`/create/ticker/?id=${id}`,{
+    ticker(id, isParking){
+      return callApi(`/create/ticker/?id=${id}&isParking=${isParking}`,{
         method: 'GET'
       })
     },
-    tarifa(){
-      return callApi(`/create/tarifa/`,{
+    tarifa(id){
+      return callApi(`/create/tarifa/${id}/`,{
+        method: 'GET'
+      })
+    },
+    tarifa2(no_tarifa){
+      return callApi(`/create/tarifa/?no_tarifa=${no_tarifa}`,{
+        method: 'GET'
+      })
+    },
+    getAll(url){
+      return callApi(`${url}/`,{
+        method: 'GET'
+      })
+    },
+    cajaAll(){
+      return callApi(`/create/caja/`,{
+        method: 'GET'
+      })
+    },
+    caja(estado){
+      return callApi(`/create/caja/?estado=${estado}`,{
         method: 'GET'
       })
     }
-  }
+  },
+  deleteData:{
+    tupla(id, url){
+      return callApi(`${url}/${id}/`,{
+        method: 'DELETE'
+      })
+    }
+  },
+  putData:{
+    ticker(id, data){
+      return callApi(`/create/ticker/${id}/`,{
+        method: 'PUT',
+        body: JSON.stringify(data)
+      })
+    },
+    caja(id, data){
+      return callApi(`/create/caja/${id}/`,{
+        method: 'PUT',
+        body: JSON.stringify(data)
+      })
+    }
+  },
+  
 }
 
 export default api;

@@ -6,9 +6,10 @@ import Nav from '../components/Nav'
 import api from '../services/Api'
 import './styles/Config.css'
 import PageLoading from '../components/PageLoading'
+import ShowDataTable from '../components/ShowDataTable'
 
 export default class Config extends Component {
-
+  
   state = {
     no_component: 0,
     error: null,
@@ -16,6 +17,11 @@ export default class Config extends Component {
     form1:{
       nombre: '',
       descripcion: ''
+    },
+    form2:{
+      nombre: '',
+      descripcion: '',
+      estado: ''
     },
     formTarifa:{
       tarifa: 0,
@@ -25,8 +31,9 @@ export default class Config extends Component {
     },
     formUser:{
       username: '',
+      rol:0,
       email: '',
-      rol:0
+      is_staff: false
     }
   }
 
@@ -107,6 +114,7 @@ export default class Config extends Component {
     this.setState({no_component: e.target.value})
   }
 
+
   render() {
     if (this.state.loading){
       <PageLoading />
@@ -128,6 +136,19 @@ export default class Config extends Component {
                </div>
             } 
           </div>
+        </div>
+        <div className='container mt-5 pb-5'>
+          {this.state.no_component==0 
+            ? <></>
+            :<>
+              {this.state.no_component==1 ? <ShowDataTable values={this.state.formUser} url='/user/list' update={this.state.update}/>:<></>} 
+              {this.state.no_component==2 ? <ShowDataTable values={this.state.form1} url='/user/createRol' update={this.state.update} />:<></>} 
+              {this.state.no_component==3 ? <ShowDataTable values={this.state.form2} url='/create/tipoResidente' update={this.state.update}/>:<></>} 
+              {this.state.no_component==4 ? <ShowDataTable values={this.state.form2} url='/create/tipoVehiculo' update={this.state.update}/>:<></>} 
+              {this.state.no_component==5 ? <ShowDataTable values={this.state.formTarifa} url='/create/tarifa' update={this.state.update}/>:<></>} 
+             </>
+          }
+          
         </div>
       </div>
     )
