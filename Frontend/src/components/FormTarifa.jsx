@@ -22,8 +22,8 @@ function FormTarifa(props) {
   return (
     <>
       <form onSubmit={props.onSubmit}>
-        <div className='form__input'>
-          <label><h3 className='text-white '>Tipo Vehiculo</h3></label>
+        <div className='form__input input-group-sm'>
+          <label><h5 className='text-white '>Tipo Vehiculo</h5></label>
           <select className='form-select' name='tipo_vehiculo' onChange={props.onChange} >
             <option selected disabled >Seleccione el tipo</option>
             {tipoVehiculo.map(tipo=>(
@@ -32,8 +32,8 @@ function FormTarifa(props) {
             
           </select>
         </div>
-        <div className='form__input'>
-          <label><h3 className='text-white '>Tipo Residente</h3></label>
+        <div className='form__input input-group-sm'>
+          <label><h5 className='text-white '>Tipo Residente</h5></label>
           <select className='form-select' name='tipo_residente' onChange={props.onChange}>
             <option selected disabled >Seleccione el tipo</option>
             {tipoResidente.map(tipo=>(
@@ -41,12 +41,12 @@ function FormTarifa(props) {
             ))}
           </select>
         </div>
-        <div className='form__input'>
-          <label><h3 className='text-white'>Tarifa</h3></label>
+        <div className='form__input input-group-sm'>
+          <label><h5 className='text-white'>Tarifa</h5></label>
           <input className='form-control' type='number' name='tarifa' onChange={props.onChange} value={props.formValues.tarifa}/>
         </div>
-        <div className='form__input'>
-          <label><h3 className='text-white '>Descripcion</h3></label>
+        <div className='form__input input-group-sm'>
+          <label><h5 className='text-white '>Descripcion</h5></label>
           <input className='form-control' type='text' name='descripcion' onChange={props.onChange} value={props.formValues.descripcion}/>
         </div>
         {props.error && (
@@ -54,7 +54,7 @@ function FormTarifa(props) {
         )}
 
         <div className='container__button'>
-          <button className='form__button' type="submit"><h3><strong>Crear Tarifa</strong></h3></button>
+          <button className='form__button' type="submit"><h5><strong>Crear Tarifa</strong></h5></button>
         </div>
       </form>
     </>

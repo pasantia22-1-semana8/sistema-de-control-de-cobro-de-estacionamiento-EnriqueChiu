@@ -30,6 +30,12 @@ const api = {
         method: 'POST',
         body: JSON.stringify(data)
       })
+    },
+    update(id, data){
+      return callApi(`/user/list/${id}/`,{
+        method: 'PUT',
+        body: JSON.stringify(data)
+      })
     }
   },
   create:{

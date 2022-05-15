@@ -9,6 +9,7 @@ function ShowRegistroCaja(props) {
   const [show, setshow] = useState(false);
   const [caja, setcaja] = useState([]);
   const [key, setkey] = useState([]);
+  
   useEffect(()=>{
     (async () => {
       const dataCaja = await api.getData.cajaAll()
@@ -51,6 +52,19 @@ function ShowRegistroCaja(props) {
             {caja.map((items, index)=>(
               <tr key={index+items['id']}>
                 {Object.values(items).map(item=>(
+                  
+                  typeof item == 'boolean'
+                  ?
+                  <>
+                    {
+                      item
+                      ?
+                      <td>Caja abierta</td>
+                      :
+                      <td>Caja cerrado</td>
+                    }
+                  </>
+                  : 
                   <td>{item.toString()}</td>
                 ))}
               </tr>

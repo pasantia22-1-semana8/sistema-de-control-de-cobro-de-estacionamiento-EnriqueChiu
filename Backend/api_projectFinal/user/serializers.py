@@ -46,12 +46,31 @@ class LoginSerializer(serializers.Serializer):
     return self.context['user'], token.key
 
 
+
 class RegisterSerializer(serializers.Serializer):
 
   username = serializers.CharField()
   email = serializers.EmailField()
   rol = serializers.IntegerField()
 
+  def validate(self, data):
+    try:
+      user = models.Profile(username=data['username'], email=data['email'], rol=models.Rol.objects.filter(id=data['rol']).get())
+      user.set_password('123456')
+      user.save()
+    except:
+      raise serializers.ValidationError('')
+    return data
+
+
+class UpdaterSerializer(serializers.Serializer):
+
+  username = serializers.CharField()
+  email = serializers.EmailField()
+  pass_old = serializers.CharField()
+  pass_new = serializers.CharField()
+  conf_pass_new = serializers.CharField()
+  
   def validate(self, data):
     try:
       user = models.Profile(username=data['username'], email=data['email'], rol=models.Rol.objects.filter(id=data['rol']).get())

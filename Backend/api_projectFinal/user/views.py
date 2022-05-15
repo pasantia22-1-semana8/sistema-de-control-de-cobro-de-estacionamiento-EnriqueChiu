@@ -2,6 +2,7 @@ from rest_framework.views import Response, APIView
 from rest_framework import viewsets
 from rest_framework import status
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
 from user import serializers, models
 
 class RolView(viewsets.ModelViewSet):
@@ -40,6 +41,32 @@ class UserView(viewsets.ModelViewSet):
     user = self.get_object()
     user.delete()
     return Response({"message": "Se elimino correctamente"})
+
+  def update(self, request, *args, **kwargs):
+    
+    user = self.get_object()
+    data_user = request.data
+    user1 =authenticate(username=data_user['username'], password=data_user['pass_old'])
+    if user == user1:
+      if data_user['pass_new']==data_user['conf_pass_new']:
+        user.set_password(data_user['pass_new'])
+        user.save()
+        res = {
+            'message': 'Se cambio el password exitosamente'
+        }
+        return Response(res, status=status.HTTP_200_OK)
+      else:
+        res = {
+        'message': 'Error no se cambio el password'
+      }
+      return Response(res, status=status.HTTP_400_BAD_REQUEST)
+    else:
+      res = {
+        'message': 'Error no se cambio el password'
+      }
+      return Response(res, status=status.HTTP_400_BAD_REQUEST)
+    
+    
 
 
 class LoginView(APIView):

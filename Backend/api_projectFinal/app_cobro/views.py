@@ -31,13 +31,6 @@ class TarifaView(viewsets.ModelViewSet):
     tarifa.delete()
     return Response({"message": "Se elimino correctamente"})
 
-  def put(self, request, *args, **kwargs):
-    tarifa = self.get_object()
-    data_tarifa = request.data
-    tarifa.name = data_tarifa["name"]
-    tarifa.save()
-    serializer_class = serializers.TarifaSerializer(tarifa)
-    return Response(serializer_class.data)
 
   def get_queryset(self):
     queryset = models.Tarifa.objects.all()
@@ -172,7 +165,6 @@ class CajaView(viewsets.ModelViewSet):
     
     caja = self.get_object()
     data_caja = request.data
-    print(data_caja)
     caja.monto = float(caja.monto) + float(data_caja['monto'])
     caja.estado = data_caja['estado']
     caja.save()

@@ -7,6 +7,8 @@ import ShowTicker from '../components/ShowTicker'
 import api from '../services/Api'
 import './styles/Home.css'
 
+
+
 export default class Home extends Component {
   state = {
     error: null,
@@ -17,6 +19,7 @@ export default class Home extends Component {
     dataFlag: false,
     dataFlag2: false,
     dataFlag3: false,
+    comprobante: false,
     data: [],
     modalData:{
       no_placa: '',
@@ -75,8 +78,9 @@ export default class Home extends Component {
 
 
   handleSumbit = async e =>{
+    
     e.preventDefault();
-    this.setState({loading: true, error: null, data:[], dataFlag:false, dataFlag2:false, dataFlag3:false});
+    this.setState({loading: true, error: null, data:[], dataFlag:false, dataFlag2:false, dataFlag3:false, comprobante: false});
     try {
       let response = await api.getData.ticker(this.state.form.id)
       if (response.length !=0){
@@ -121,7 +125,6 @@ export default class Home extends Component {
       alert(response.message)
       let response2 = await api.create.ticker(this.state.modalData);
       alert(response2.message)
-      //AGREGAR NORIFICACION
       this.setState({loading: false, data: response2, 
         modalData: {
           no_placa: '',
@@ -145,10 +148,12 @@ export default class Home extends Component {
       await api.putData.ticker(this.state.data[0].id, this.state.data[0])
 
       this.state.caja.monto = monto;
-      await api.putData.caja(this.state.caja.id, this.state.caja)
+      await api.putData.caja(this.state.caja.id, this.state.caja);
       this.state.caja.monto = 0;
       
-      alert('Se realizo el pago')
+      alert('Se realizo el pago');
+      this.setState({comprobante: true})
+
     } catch (error) {
       alert(error)
     }
@@ -184,7 +189,9 @@ export default class Home extends Component {
     }
 
     return (
+      
       <div className='container__home'>
+        
         <Nav />
         <button className='btn btn-danger ms-2 mt-2' onClick={this.closeCaja}>CERRAR CAJA</button>
         <ShowRegistroCaja />
@@ -204,7 +211,7 @@ export default class Home extends Component {
                 {
                   this.state.dataFlag3
                   ?
-                  <ShowTicker  pay={this.pay} data={this.state.data[0]}/>
+                  <ShowTicker  pay={this.pay} data={this.state.data[0]} comprobante={this.state.comprobante}/>
                   :
                   <>
                     <h1 className='home-info--title'>GENERAR TICKER.</h1>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState  } from 'react'
 import Modal from "react-bootstrap/Modal";
 import api from '../services/Api';
 
@@ -28,6 +28,7 @@ function FormRegisterVehiculo(props) {
   const handleShow = () => {
     setshow(true)
   };
+  
 
   return (
     <>
@@ -77,6 +78,8 @@ function FormRegisterVehiculo(props) {
             <button className='btn btn-secondary' onClick={handleClose}>
               <h3>Cancelar</h3>
             </button>
+            
+              
             <button className='btn btn-primary ms-5' onClick={handleClose}>
               <h3>Registrar</h3>
             </button>

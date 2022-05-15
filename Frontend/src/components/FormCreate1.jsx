@@ -4,12 +4,12 @@ function FormRol(props) {
   return (
     <>
       <form onSubmit={props.onSubmit}>
-        <div className='form__input'>
-          <label><h2 className='text-white '>Nombre</h2></label>
+        <div className='form__input input-group-sm'>
+          <label><h5 className='text-white '>Nombre</h5></label>
           <input className='form-control' type='text' name='nombre' onChange={props.onChange} value={props.formValues.nombre}/>
         </div>
-        <div className='form__input'>
-          <label><h2 className='text-white '>Descripcion</h2></label>
+        <div className='form__input input-group-sm'>
+          <label><h5 className='text-white '>Descripcion</h5></label>
           <input className='form-control' type='text' name='descripcion' onChange={props.onChange} value={props.formValues.descripcion}/>
         </div>
         {props.error && (
@@ -17,7 +17,7 @@ function FormRol(props) {
         )}
 
         <div className='container__button'>
-          <button className='form__button' type="submit"><h3><strong>Crear {props.title}</strong></h3></button>
+          <button className='form__button' type="submit"><h5><strong>Crear {props.title}</strong></h5></button>
         </div>
       </form>
     </>
